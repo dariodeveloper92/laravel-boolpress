@@ -6,7 +6,7 @@
         <div class="col-12">
             {{-- New Post --}}
             <h1>Creazione nuovo Post</h1>
-            <form action="{{ route('admin.posts.store')}}" method="post">
+            <form action="{{ route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
                 <div class="form-group">
@@ -27,7 +27,13 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                {{-- inserisco immagine cover --}}
                 <div class="form-group">
+                    <label class="d-block" for="image">immagine di copertina</label>
+                    <input type="file" id="image" name="image">
+                </div>
+                {{-- Fine immagine cover --}}
+                 <div class="form-group">
                     <label for="category_id">Categoria</label>
                     <select name="category_id" id="category_id" class="form-control 
                     @error('category_id') is-invalid @enderror">

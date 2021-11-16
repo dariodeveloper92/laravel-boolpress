@@ -30,7 +30,13 @@
                 {{-- inserisco immagine cover --}}
                 <div class="form-group">
                     <label class="d-block" for="image">immagine di copertina</label>
-                    <input type="file" id="image" name="image">
+                    <input type="file" id="image" name="image" class="form-group @error('image') is-invalid @enderror">
+                    {{-- messaggio errore se non scrivi il contenuto --}}
+                    @error('image')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                {{-- inserisco immagine cover --}}
                 </div>
                 {{-- Fine immagine cover --}}
                  <div class="form-group">

@@ -49,16 +49,14 @@ class PostController extends Controller
             'content' => 'required',
             'category_id' => 'nullable|exists:categories,id',
             'tags' =>  'exists:tags,id',
-            'image' => 'nullable|image'
         ]);
 
         $form_data = $request->all();
-        //dd($form_data);
         // Verifico se è stata caricata un'immagine 
         if(array_key_exists('image', $form_data)) {
             // salviamo l'immagine e recuperiamo il path
-            $cover_path = Storage::put('post_covers', $form_data['image']);
-            
+            $cover_path = Storage::put('postcovers', $form_data['image']);
+                        
             // aggiungiamo all'array che viene usato nella funzione fill
             // la chiave cover che contiene il percorso relativo dell'immagine caricata a partire da public\storage
             $form_data['cover'] = $cover_path;
@@ -163,6 +161,13 @@ class PostController extends Controller
             }
 
             $form_data['slug'] = $slug;
+        }
+
+        //verifico se è stata caricata l'immagine
+        if(array_key_exists('image', $form_data)) {
+            //salvo l'immagine e recupero il path
+            $cover_path = Storage::put('postcovers', $form_data['image']);
+            $form_data['cover'] = $cover_path;
         }
 
         $post->update($form_data);

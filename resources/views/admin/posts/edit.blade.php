@@ -29,6 +29,22 @@
                         </div>
                     @enderror
                 </div>
+                {{-- inserisco immagine cover --}}
+                <div class="form-group">
+                    @if ($post->cover)
+                        <p>Immagine di copertina presente:</p>
+                        <img class="d-block" src="{{asset('storage/' . $post->cover)}}" alt="">
+                    @else
+                        <p>Immagine di copertina non presente!</p>
+                    @endif
+                    <label class="d-block" for="image">immagine di copertina</label>
+                    <input type="file" id="image" name="image" class="form-group @error('image') is-invalid @enderror">
+                    {{-- messaggio errore se non scrivi il contenuto --}}
+                    @error('image')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                {{-- inserisco immagine cover --}}
                 <div class="form-group">
                     <label for="category_id">Categoria</label>
                     <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror">

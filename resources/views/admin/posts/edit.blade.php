@@ -6,7 +6,7 @@
         <div class="col-12">
             {{-- Modifica Post --}}
             <h1> Modifica Post</h1>
-            <form action="{{ route('admin.posts.update', $post->id)}}" method="post">
+            <form action="{{ route('admin.posts.update', $post->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">

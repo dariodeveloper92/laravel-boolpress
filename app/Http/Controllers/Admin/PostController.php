@@ -170,7 +170,7 @@ class PostController extends Controller
         if(array_key_exists('image', $form_data)) {
             //salvo l'immagine e recupero il path
             Storage::delete($post->cover);
-            
+
             $cover_path = Storage::put('postcovers', $form_data['image']);
             $form_data['cover'] = $cover_path;
         }
@@ -202,5 +202,14 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('admin.posts.index')->with('deleted', 'Post eliminato');
     }
+
+    public function deleteImage($cover_path)
+    {
+        $cover_path = 'postcovers/'.$cover_path;
+        Storage::delete($cover_path);
+        return redirect()->route('admin.posts.index');
+    }
 }
+
+
 

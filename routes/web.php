@@ -22,6 +22,11 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::resource('/posts', 'PostController');
 Route::get('/vue-posts', 'PostController@listPostsApi')->name('list-posts-api');
 
+//Rotte Mail
+Route::get('/contact', 'HomeController@contact')->name('contact');
+Route::post('/contact', 'HomeController@handleContactForm')->name('contact.send');
+Route::get('/thank-you', 'HomeController@thankYou')->name('contact.thank-you');
+
 /* Serie di rotte che gestisce tutto il meccanismo di autenticazione */
 Auth::routes();
 
@@ -37,4 +42,7 @@ Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
         /* Rotte per la pagina profilo*/
         Route::get('/profile', 'HomeController@profile')->name('profile');
         Route::post('/generate-token', 'HomeController@generateToken')->name('generate-token');
+
+        /* Rotte per la cancellazione immagine*/
+        Route::get('/deleteImage/cover_path', 'PostControllerr@deleteImage')->name('deleteImage');
     });
